@@ -18,27 +18,27 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex ">
-    <div className={`max-w-5xl mx-auto p-4 mt-16 bg-blue-gray-200 rounded-lg shadow-md flex flex-col items-center gap-5`}>
+    <div className="flex w-ful bg-gray-100 px-[100px] py-[50px] gap-10">
+      <div className='bg-blue-gray-200 rounded-lg shadow-md flex flex-col items-center gap-5 w-[300px] px-[25px] pt-8'>
         <h1 className="text-2xl font-bold mb-4">Панель настройки парсеров</h1>
-            <ParserData link='http://localhost:3000/parser-brokinvest' name='Brokinvest' />
-            <ParserData link='http://localhost:3000/parser-demidov' name='Demidov' />
-            <ParserData link='http://localhost:3000/parser-dipos' name='Dipos' />
-            <ParserData link='http://localhost:3000/parser-ktzholding' name='Ktzholding' />
-            <ParserData link='http://localhost:3000/parser-mc' name='mc' />
-            <ParserData link='http://localhost:3000/parser-metallotorg' name='Metallotorg' />
-            <ParserData link='http://localhost:3000/parser-ntpz' name='Ntpz' />
-            <div style={{display: 'flex', flexDirection: 'column', gap: '25px', padding: '20px', border: '2px solid #ccc', borderColor: 'blue', borderRadius: '8px', marginBottom: '20px' }}>
-                <h2>Парсер Evraz</h2>
-                <input
-  type="file"
-  accept=".xlsx"
-  onChange={(e) => setFile(e.target.files?.[0] || null)}
-/>
-      <button onClick={handleUpload}>Загрузить</button></div>
-      
-    </div>
-<ParserTable />
+        <ParserData link='http://localhost:3000/parser-brokinvest' name='Brokinvest' urlProvider='https://www.brokinvest.ru/catalog' />
+        <ParserData link='http://localhost:3000/parser-demidov' name='Demidov' urlProvider='https://demidovsteel.ru/catalog/' />
+        <ParserData link='http://localhost:3000/parser-dipos' name='Dipos' urlProvider='https://dipos.ru/' />
+        <ParserData link='http://localhost:3000/parser-ktzholding' name='Ktzholding' urlProvider='https://ktzholding.com/category/truba' />
+        <ParserData link='http://localhost:3000/parser-mc' name='mc' urlProvider='https://mc.ru/products/msk' />
+        <ParserData link='http://localhost:3000/parser-metallotorg' name='Metallotorg' urlProvider='https://metallotorg.ru/info/pricelists/moscow/' />
+        <ParserData link='http://localhost:3000/parser-ntpz' name='Ntpz' urlProvider='https://ntpz.ru/' />
+        <ParserData link='http://localhost:3000/parser-ag' name='AG amrket' urlProvider='https://ag.market/catalog/' />
+        {/* Evraz parser */}
+        <div className='flex flex-col gap-5 bg-white border-2 border-black rounded-lg w-full h-auto p-4 mb-6'>
+            <a className='text-2xl' href="https://evraz.market/pricelist/"><h2>Парсер Evraz</h2></a>
+            <input type="file" accept=".xlsx" 
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
+            />
+          <button className="bg-gray-300" onClick={handleUpload}>Загрузить</button>
+        </div>
+      </div>
+      <ParserTable />
     </div>
 
   );

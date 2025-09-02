@@ -14,6 +14,7 @@ import { colors } from "./constants/themeColors";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFoundPage from "./pages/NotFoundPage";
 import AdminPanel from "./pages/AdminPanel";
+import ExampleCatalog from "./features/parsers/ExampleCatalog";
 
 function AppContent() {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ function AppContent() {
               <Route path="/orders" element={<OrdersPage />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/admin-panel" element={<AdminPanel />} />
+              <Route path="/example-catalog" element={<ExampleCatalog />} />
             </Routes>
           </ErrorBoundary>
         </main>

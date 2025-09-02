@@ -85,7 +85,7 @@ const updateParams = (key: string, value: string) => {
   }, [searchParams]);
 
   return (
-    <div className="p-6">
+    <div className="p-6 w-full bg-gray-300">
       <h1 className="text-xl font-bold mb-4">Фильтр товаров</h1>
 
       {/* Фильтры */}

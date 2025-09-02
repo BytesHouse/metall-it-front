@@ -12,9 +12,10 @@ interface Product {
 interface DiposParserProps {
   link: string;
   name: string;
+  urlProvider?: string;
 }
 
-const ParserData: React.FC<DiposParserProps> = ({link, name} ) => {
+const ParserData: React.FC<DiposParserProps> = ({link, name, urlProvider} ) => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
@@ -91,13 +92,19 @@ const ParserData: React.FC<DiposParserProps> = ({link, name} ) => {
   }, [page]);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '25px', padding: '20px', border: '2px solid #ccc', borderColor: 'blue', borderRadius: '8px', marginBottom: '20px' }}>
-      <h2 className='text-2xl'>Парсер {name}</h2>
-      <div style={{ marginBottom: '10px' }}>
-        <button onClick={startParser} disabled={loading}>Запустить парсер</button>
-        <button onClick={stopParser} disabled={loading} style={{ marginLeft: '10px' }}>Остановить парсер</button>
-        <button onClick={downloadExcel} disabled={loading} style={{ marginLeft: '10px' }}>Скачать Excel</button>
+    <div className='flex flex-col gap-[25px] bg-white border-2 border-black rounded-lg w-full h-auto p-4 mb-6'>
+      <div className='text-2xl'>
+        {!!urlProvider ? 
+          <a href={urlProvider} target="_blank" rel="noopener noreferrer">
+            <h2>Парсер {name}</h2>
+          </a> : 
+        <h2>Парсер {name}</h2>
+        }
       </div>
+        <button className='bg-gray-300' onClick={startParser} disabled={loading}>Запустить парсер</button>
+        <button className='bg-gray-300' onClick={stopParser} disabled={loading}>Остановить парсер</button>
+        <button className='bg-gray-300' onClick={downloadExcel} disabled={loading}>Скачать Excel</button>
+      
       {message && <p>{message}</p>}
       {/* <h3>Товары</h3>
       <table border={1} cellPadding={5} cellSpacing={0}>
