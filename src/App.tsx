@@ -13,6 +13,7 @@ import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { colors } from "./constants/themeColors";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFoundPage from "./pages/NotFoundPage";
+import AdminPanel from "./pages/AdminPanel";
 
 function AppContent() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ function AppContent() {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/orders" element={<OrdersPage />} />
               <Route path="*" element={<NotFoundPage />} />
+              <Route path="/admin-panel" element={<AdminPanel />} />
             </Routes>
           </ErrorBoundary>
         </main>
