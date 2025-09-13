@@ -19,7 +19,7 @@ export default function Catalog() {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const res = await fetch("http://localhost:3000/unify/filters");
+        const res = await fetch("http://185.23.34.85:3000/unify/filters");
         const data = await res.json();
         setAllCategories(data.categories || []);
         setAllProviders(data.providers || []);
@@ -43,7 +43,7 @@ export default function Catalog() {
           provider: filters.provider.join(","),
         });
 
-        const res = await fetch(`http://localhost:3000/unify/items?${query.toString()}`);
+        const res = await fetch(`http://185.23.34.85:3000/unify/items?${query.toString()}`);
         const data = await res.json();
         setItems(data.items || []);
       } catch (err) {

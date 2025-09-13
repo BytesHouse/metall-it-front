@@ -8,7 +8,7 @@ import { Typography, Checkbox } from "@material-tailwind/react";
 import ProductSort from "./copmonents/ProductSort";
 import axios from "axios";
 
-const res = await axios.get('http://localhost:3000/unify/items')
+const res = await axios.get('http://185.23.34.85:3000/unify/items')
 console.log(res.data);
 
 const productsData: MetalProduct[] = [
