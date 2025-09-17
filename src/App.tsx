@@ -1,7 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
-import LoginPage from "./features/auth/pages/LoginPage";
-import RegisterPage from "./features/auth/pages/RegisterPage";
 import Header from "./features/auth/components/Header";
 import HomePage from "./features/home/HomePage";
 import Footer from "./features/home/Footer";
@@ -15,6 +13,9 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import NotFoundPage from "./pages/NotFoundPage";
 import AdminPanel from "./pages/AdminPanel";
 import ExampleCatalog from "./features/parsers/ExampleCatalog";
+import RegisterFormTest from "./features/auth/RegisterForm";
+import LoginFormTest from "./features/auth/LoginForm";
+import Profile from "./features/auth/Profile";
 
 function AppContent() {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ function AppContent() {
     alert("Заказ успешно оформлен! Вы будете перенаправлены на страницу заказов.");
   };
 
+  const isAuthenticated = !!localStorage.getItem("access_token");
+
   return (
     <CartProvider onCheckoutSuccess={handleCheckoutSuccess}>
       <div className={`min-h-screen flex flex-col ${currentThemeColors.primaryBackground} transition-colors duration-300`}>
@@ -34,8 +37,9 @@ function AppContent() {
           <ErrorBoundary>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <LoginFormTest />} />
+              <Route path="/register" element={isAuthenticated ? <Navigate to="/profile" /> : <RegisterFormTest />} />
+              <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
               <Route path="/catalog" element={<CatalogPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/orders" element={<OrdersPage />} />

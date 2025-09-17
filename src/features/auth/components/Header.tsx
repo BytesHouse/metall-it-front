@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Typography, Button, Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwind/react";
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 import { useCart } from "../../../context/CartContext";
 import { useTheme } from "../../../context/ThemeContext";
 import { headerColors } from "../../../constants/themeColors";
@@ -12,12 +12,15 @@ interface HeaderProps {
 }
 
 function Header({ onSearchChange, searchValue }: HeaderProps) {
-  const { isAuthenticated, logout } = useAuth();
+  // const { isAuthenticated, logout } = useAuth();
   const { items } = useCart();
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const currentHeaderColors = headerColors[theme];
+
+  const isAuthenticated = !!localStorage.getItem("access_token");
+  const navigate = useNavigate();
 
   const commonPlaceholderProps = {
     placeholder: undefined,
@@ -134,7 +137,10 @@ function Header({ onSearchChange, searchValue }: HeaderProps) {
                 <Button
                   variant="outlined"
                   size="sm"
-                  onClick={logout}
+                  onClick={() => {
+          localStorage.removeItem("access_token");
+          navigate("/login");
+        }}
                   className={`h-10 ${currentHeaderColors.buttonBorder} ${currentHeaderColors.buttonText} ${currentHeaderColors.buttonHoverBg} ${currentHeaderColors.buttonHoverText} transition-colors duration-300`}
                   {...commonPlaceholderProps}
                 >
@@ -260,7 +266,10 @@ function Header({ onSearchChange, searchValue }: HeaderProps) {
                       </MenuItem>
                     </Link>
                     <MenuItem
-                      onClick={logout}
+                      onClick={() => {
+          localStorage.removeItem("access_token");
+          navigate("/login");
+        }}
                       className={`mb-2 ${currentHeaderColors.buttonText} hover:${currentHeaderColors.buttonHoverBg} hover:${currentHeaderColors.buttonHoverText} border-b border-[#FFD700]`}
                       {...commonPlaceholderProps}
                     >
