@@ -28,7 +28,7 @@ const ParserData: React.FC<DiposParserProps> = ({link, name, urlProvider} ) => {
   const startParser = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/start`);
+      const res = await axios.post(`${API_BASE}/start`);
       const data = res.data as { message: string };
       setMessage(data.message);
     } catch (err: any) {
@@ -41,7 +41,7 @@ const ParserData: React.FC<DiposParserProps> = ({link, name, urlProvider} ) => {
   const stopParser = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/stop`);
+      const res = await axios.post(`${API_BASE}/stop`);
       const data = res.data as { message: string };
       setMessage(data.message);
     } catch (err: any) {
